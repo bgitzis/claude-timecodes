@@ -25,6 +25,20 @@ That's it. The installer:
 
 Every Claude Code session from that point forward shows timestamped speaker labels on every exchange.
 
+### From source
+
+If you've cloned the repo (e.g. to run a local fork or tweak the hook):
+
+```bash
+cd path/to/claude-timecodes
+npm link                    # symlinks the `claude-timecodes` command to this clone
+claude-timecodes install    # copies hooks/timecode.sh to ~/.claude/ and wires up settings
+```
+
+`npm link` makes the global `claude-timecodes` command resolve to your working copy — edits to `bin/cli.js` and `lib/*.js` are picked up on the next invocation with no rebuild. The hook script is copied by value during `install`, so re-run `claude-timecodes install` after editing `hooks/timecode.sh` to refresh `~/.claude/timecode.sh`.
+
+To undo: `claude-timecodes uninstall` removes the hook entries from `~/.claude/settings.json`; `npm unlink -g claude-timecodes` removes the global command.
+
 ## What You Get
 
 ### Live speaker labels and timestamps
