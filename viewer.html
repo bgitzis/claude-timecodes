@@ -213,15 +213,13 @@ async function loadConversation(sessionId) {
     const roleClass = msg.type === 'user' ? 'role-user' : 'role-claude';
     const bodyClass = msg.type === 'user' ? 'user-body' : 'claude-body';
     const content = extractText(msg.message?.content || '');
-    // Truncate very long Claude messages
-    const display = content.length > 2000 ? content.slice(0, 2000) + '\n\n[...truncated]' : content;
 
     return `<div class="message" id="msg-${i}">
       <div class="message-header">
         <span class="timecode" title="Click to copy">${tc}</span>
         <span class="role ${roleClass}">${role}</span>
       </div>
-      <div class="message-body ${bodyClass}">${escapeHtml(display)}</div>
+      <div class="message-body ${bodyClass}">${escapeHtml(content)}</div>
     </div>`;
   }).join('');
 
